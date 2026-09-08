@@ -1,0 +1,291 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | RecipeBhook</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/output.css' %}"
+    >
+</head>
+
+<body class="min-h-screen bg-stone-100">
+
+    <main class="grid min-h-screen lg:grid-cols-2">
+
+        <!-- Left Branding Section -->
+        <section class="relative hidden overflow-hidden lg:flex">
+
+            <!-- Background -->
+            <div class="absolute inset-0 bg-stone-900"></div>
+
+            <!-- Background Image -->
+            <img
+                src="{% static 'images/ramen-image.jpg' %}"
+                alt="Delicious food"
+                class="absolute inset-0 h-full w-full object-cover opacity-40"
+            >
+
+            <!-- Dark Overlay -->
+            <div class="absolute inset-0 bg-stone-950/60"></div>
+
+
+            <!-- Content -->
+            <div class="relative z-10 flex w-full flex-col justify-between p-12">
+
+                <!-- Logo -->
+                <a
+                    href="{% url 'home' %}"
+                    class="inline-flex items-center gap-3 self-start"
+                >
+
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400 text-stone-900 shadow-lg">
+
+                        <!-- Fork Icon -->
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M12 2v20"/>
+                            <path d="M8 2v6a4 4 0 0 0 8 0V2"/>
+                        </svg>
+
+                    </div>
+
+                    <span class="text-2xl font-bold text-white">
+                        RecipeBhook
+                    </span>
+
+                </a>
+
+
+                <!-- Main Text -->
+                <div class="max-w-lg">
+
+                    <p class="font-semibold text-amber-400">
+                        Your kitchen companion
+                    </p>
+
+                    <h1 class="mt-4 text-5xl font-bold leading-tight text-white">
+                        Cook something
+                        <span class="text-amber-400">
+                            delicious.
+                        </span>
+                    </h1>
+
+                    <p class="mt-6 text-lg leading-8 text-stone-300">
+                        Discover recipes from the ingredients you already have,
+                        or get step-by-step guidance for your next meal.
+                    </p>
+
+                </div>
+
+
+                <!-- Bottom Text -->
+                <p class="text-sm text-stone-400">
+                    Your personal AI-powered cooking companion.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Right Login Section -->
+        <section class="flex items-center justify-center px-4 py-12 sm:px-6 lg:px-12">
+
+            <div class="w-full max-w-md">
+
+                <!-- Mobile Logo -->
+                <a
+                    href="{% url 'home' %}"
+                    class="mb-10 inline-flex items-center gap-3 lg:hidden"
+                >
+
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-400 text-stone-900">
+
+                        <!-- Fork Icon -->
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M12 2v20"/>
+                            <path d="M8 2v6a4 4 0 0 0 8 0V2"/>
+                        </svg>
+
+                    </div>
+
+                    <span class="text-xl font-bold text-stone-900">
+                        RecipeBhook
+                    </span>
+
+                </a>
+
+
+                <!-- Heading -->
+                <div>
+
+                    <p class="font-semibold text-orange-600">
+                        Welcome back
+                    </p>
+
+                    <h1 class="mt-3 text-4xl font-bold tracking-tight text-stone-900">
+                        Log in to your account
+                    </h1>
+
+                    <p class="mt-3 leading-7 text-stone-600">
+                        Continue exploring recipes and cooking ideas made for you.
+                    </p>
+
+                </div>
+
+
+                <!-- Error Message -->
+                {% if error %}
+
+                    <div class="mt-6 flex gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="mt-0.5 h-5 w-5 shrink-0 text-red-600"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 8v4"/>
+                            <path d="M12 16h.01"/>
+                        </svg>
+
+                        <p class="text-sm font-medium text-red-700">
+                            {{ error }}
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- Login Form -->
+                <form method="POST" class="mt-8 space-y-6">
+
+                    {% csrf_token %}
+
+
+                    <!-- Username -->
+                    <div>
+
+                        <label
+                            for="username"
+                            class="mb-2 block font-semibold text-stone-800"
+                        >
+                            Username
+                        </label>
+
+                        <input
+                            id="username"
+                            type="text"
+                            name="username"
+                            required
+                            autocomplete="username"
+                            placeholder="Enter your username"
+                            class="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
+                        >
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div>
+
+                        <label
+                            for="password"
+                            class="mb-2 block font-semibold text-stone-800"
+                        >
+                            Password
+                        </label>
+
+                        <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            required
+                            autocomplete="current-password"
+                            placeholder="Enter your password"
+                            class="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
+                        >
+
+                    </div>
+
+
+                    <!-- Submit -->
+                    <button
+                        type="submit"
+                        class="group flex w-full items-center justify-center gap-3 rounded-xl bg-orange-600 px-6 py-4 font-semibold text-white shadow-sm transition duration-300 hover:bg-orange-700 hover:shadow-lg"
+                    >
+
+                        Log In
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 transition duration-300 group-hover:translate-x-1"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 12h14"/>
+                            <path d="m12 5 7 7-7 7"/>
+                        </svg>
+
+                    </button>
+
+                </form>
+
+
+                <!-- Register Link -->
+                <p class="mt-8 text-center text-stone-600">
+
+                    Don't have an account?
+
+                    <a
+                        href="{% url 'accounts:register' %}"
+                        class="font-semibold text-orange-600 transition hover:text-orange-700"
+                    >
+                        Create one
+                    </a>
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

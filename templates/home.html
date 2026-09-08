@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+RecipeBhook | Dashboard
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative overflow-hidden">
+
+    <!-- Ramen Background Image -->
+    <img
+        src="{% static 'images/ramen-image.jpg' %}"
+        alt="Delicious ramen"
+        class="absolute inset-0 h-full w-full object-cover"
+    >
+
+    <!-- Transparent Dark Overlay -->
+    <div class="absolute inset-0 bg-stone-950/70"></div>
+
+    <!-- Content -->
+    <div class="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
+
+        <!-- Welcome Text -->
+        <div class="max-w-3xl">
+
+            <p class="font-semibold text-amber-300">
+                Welcome back,
+            </p>
+
+            <h1 class="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                What are we cooking today?
+            </h1>
+
+            <p class="mt-4 text-lg leading-8 text-stone-200">
+                Get personalized recipe ideas using the ingredients you already
+                have, or ask RecipeBhook to guide you through any dish.
+            </p>
+
+        </div>
+
+
+        <!-- Recipe Mode Cards -->
+        <div class="mt-12 grid gap-8 md:grid-cols-2">
+
+            <!-- What Can I Cook Card -->
+            <article class="overflow-hidden rounded-2xl border border-white/20 bg-white/95 shadow-xl transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-2xl">
+
+                <img
+                    src="{% static 'images/chicken-tikka.jpg' %}"
+                    alt="Chicken tikka"
+                    class="h-48 w-full object-cover"
+                >
+
+                <div class="p-8">
+
+                    <h2 class="text-2xl font-bold text-stone-900">
+                        What Can I Cook?
+                    </h2>
+
+                    <p class="mt-3 leading-7 text-stone-600">
+                        Tell us which ingredients you have in your kitchen,
+                        and get a personalized recipe built around them.
+                    </p>
+
+                    <a
+                        href="{% url 'recipes:ingredient_recipe' %}"
+                        class="mt-6 inline-flex items-center gap-2 rounded-lg bg-orange-600 px-5 py-3 font-semibold text-white transition hover:bg-orange-700"
+                    >
+                        Find a Recipe
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 transition duration-300 group-hover:translate-x-1"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 12h14"/>
+                            <path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- Guide Me to Cook Card -->
+            <article class="overflow-hidden rounded-2xl border border-white/20 bg-white/95 shadow-xl transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-2xl">
+
+                <img
+                    src="{% static 'images/kitchen-image.jpg' %}"
+                    alt="Cooking in a kitchen"
+                    class="h-48 w-full object-cover"
+                >
+
+                <div class="p-8">
+
+                    <h2 class="text-2xl font-bold text-stone-900">
+                        Guide Me to Cook
+                    </h2>
+
+                    <p class="mt-3 leading-7 text-stone-600">
+                        Know what you want to cook? Ask for any dish and get
+                        step-by-step cooking guidance.
+                    </p>
+
+                    <a
+                        href="{% url 'recipes:guide_recipe' %}"
+                        class="mt-6 inline-flex items-center gap-2 rounded-lg bg-stone-900 px-5 py-3 font-semibold text-white transition hover:bg-stone-700"
+                    >
+                        Ask for a Recipe
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 transition duration-300 hover:translate-x-1"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 12h14"/>
+                            <path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Recipe Library Section -->
+<section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+
+    <!-- Section Heading -->
+    <div class="mb-8">
+
+        <p class="font-semibold text-orange-600">
+            Your collection
+        </p>
+
+        <h2 class="mt-2 text-3xl font-bold text-stone-900">
+            Your Recipe Library
+        </h2>
+
+        <p class="mt-3 max-w-2xl text-stone-600">
+            Keep track of the recipes you create and save the ones you love.
+        </p>
+
+    </div>
+
+
+    <!-- Library Cards -->
+    <div class="grid gap-6 md:grid-cols-2">
+
+
+        <!-- My Recipes Card -->
+        <a
+            href="{% url 'recipes:my_recipes' %}"
+            class="group relative overflow-hidden rounded-2xl border border-stone-200 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-xl"
+        >
+
+            <!-- Decorative Background Circle -->
+            <div class="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-orange-50 transition duration-300 group-hover:scale-125"></div>
+
+
+            <div class="relative">
+
+                <!-- Recipe Book Icon -->
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-stone-900 shadow-sm">
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-7 w-7"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+
+                </div>
+
+
+                <h3 class="mt-6 text-2xl font-bold text-stone-900 transition group-hover:text-orange-600">
+                    My Recipes
+                </h3>
+
+
+                <p class="mt-3 max-w-md leading-7 text-stone-600">
+                    View all the recipes you have generated and explored
+                    with RecipeBhook.
+                </p>
+
+
+                <!-- CTA -->
+                <div class="mt-7 flex items-center gap-2 font-semibold text-orange-600">
+
+                    <span>View my recipes</span>
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 transition duration-300 group-hover:translate-x-1"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- Favorites Card -->
+        <a
+            href="{% url 'recipes:favorites' %}"
+            class="group relative overflow-hidden rounded-2xl border border-stone-200 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-xl"
+        >
+
+            <!-- Decorative Background Circle -->
+            <div class="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-red-50 transition duration-300 group-hover:scale-125"></div>
+
+
+            <div class="relative">
+
+                <!-- Heart Icon -->
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-red-500 shadow-sm">
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-7 w-7"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    >
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+
+                </div>
+
+
+                <h3 class="mt-6 text-2xl font-bold text-stone-900 transition group-hover:text-red-500">
+                    Favorites
+                </h3>
+
+
+                <p class="mt-3 max-w-md leading-7 text-stone-600">
+                    Quickly access the recipes you love and want to
+                    cook again.
+                </p>
+
+
+                <!-- CTA -->
+                <div class="mt-7 flex items-center gap-2 font-semibold text-red-500">
+
+                    <span>View favorites</span>
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 transition duration-300 group-hover:translate-x-1"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <!-- AI Information Section -->
+    <section class="mt-16 rounded-3xl bg-stone-900 px-8 py-10 text-white sm:px-12">
+
+        <p class="font-semibold text-amber-400">
+            Powered by AI
+        </p>
+
+        <h2 class="mt-3 text-3xl font-bold">
+            Your kitchen, your ingredients, your recipes.
+        </h2>
+
+        <p class="mt-4 max-w-2xl leading-7 text-stone-300">
+            RecipeBhook helps you discover recipes using the ingredients
+            you already have or guides you through preparing the dish
+            you want to cook.
+        </p>
+
+    </section>
+
+</section>
+
+{% endblock %}
