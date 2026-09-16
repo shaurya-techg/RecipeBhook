@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        disableConcurrentBuilds()
+    }
+
     stages {
 
         stage('Checkout') {
@@ -18,6 +22,17 @@ pipeline {
                       git /repo \
                       --redact \
                       --exit-code 1
+                '''
+            }
+        }
+
+        stage('Bandit') {
+            steps {
+                sh '''
+                    docker run --rm \
+                      -v "$WORKSPACE:/src" \
+                      python:3.12-slim \
+                      sh -c "pip install --no-cache-dir bandit && bandit -r /src -ll"
                 '''
             }
         }
