@@ -37,6 +37,17 @@ pipeline {
             }
         }
 
+        stage('pip-audit') {
+            steps {
+                sh '''
+                    docker run --rm \
+                      -v "$WORKSPACE:/src" \
+                      python:3.12-slim \
+                      sh -c "pip install --no-cache-dir pip-audit && pip-audit -r /src/requirements.txt"
+                '''
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 script {
