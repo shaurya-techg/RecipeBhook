@@ -72,5 +72,39 @@ pipeline {
                 '''
             }
         }
+
+        stage('Hadolint') {
+            steps {
+                sh '''
+                    docker run --rm \
+                      -i \
+                      hadolint/hadolint < "$WORKSPACE/Dockerfile"
+                '''
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh '''
+                    docker build \
+                      -t recipebhook:ci \
+                      "$WORKSPACE"
+                '''
+            }
+        }
+
+        stage('Trivy') {
+            steps {
+                sh '''
+                    docker run --rm \
+                      -v /var/run/docker.sock:/var/run/docker.sock \
+                      aquasec/trivy:latest \
+                      image \
+                      --severity HIGH,CRITICAL \
+                      --exit-code 1 \
+                      recipebhook:ci
+                '''
+            }
+        }
     }
 }
