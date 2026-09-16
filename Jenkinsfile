@@ -9,6 +9,19 @@ pipeline {
             }
         }
 
+        stage('Gitleaks') {
+            steps {
+                sh '''
+                    docker run --rm \
+                      -v "$WORKSPACE:/repo" \
+                      zricethezav/gitleaks:latest \
+                      git /repo \
+                      --redact \
+                      --exit-code 1
+                '''
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 script {
