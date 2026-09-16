@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     options {
+        // Prevent multiple builds from running at the same time
         disableConcurrentBuilds()
     }
 
@@ -57,6 +58,18 @@ pipeline {
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
+            }
+        }
+
+        stage('Semgrep') {
+            steps {
+                sh '''
+                    docker run --rm \
+                      -v "$WORKSPACE:/src" \
+                      semgrep/semgrep \
+                      semgrep scan --config auto /src \
+                      --exclude terraform/
+                '''
             }
         }
     }
